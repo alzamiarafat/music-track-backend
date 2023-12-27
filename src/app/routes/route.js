@@ -3,10 +3,11 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers');
 
+router.get('/musics', controller.MusicController.index);
+router.post('/musics', controller.MusicController.create);
+router.get('/musics/:id', controller.MusicController.show);
 
-router.get('/music', controller.MusicController.index)
 router.get('/', (req, res) => {
-    console.log("🚀 ~ file: route.js:9 ~ router.get ~ res:", res)
     res.send(':)');
 });
 

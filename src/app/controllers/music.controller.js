@@ -10,6 +10,24 @@ const MusicController = {
         } catch (error) {
             next(error);
         }
+    },
+
+    create: async (req, res, next) => {
+        try {
+            const result = await MusicService.store(req);
+            ModelService.successResponse(res, result);
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    show: async (req, res, next) => {
+        try {
+            const result = await MusicService.getOne(req);
+            ModelService.successResponse(res, result);
+        } catch (error) {
+            next(error);
+        }
     }
 }
 

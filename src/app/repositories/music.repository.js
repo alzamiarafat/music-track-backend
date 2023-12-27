@@ -3,36 +3,25 @@
 // const db = require('../../models/commerce');
 // const { ErrorConstant } = require('../../constant');
 
+const Music = require("../models/Music");
+
 const MusicRepository = {
     all: async (req) => {
-        // let include = [];
-        // let where = {};
+        return await Music.find();
+    },
 
-        // const { q, value, status } = req.query;
+    one: async (id) => {
+        return await Music.findById(id);
+    },
 
-        // if (value) where.value = { [Op.iLike]: `%${value}%` }
-        // if (status) where.status = status;
-
-        // let queryOptions = await ModelService.getQueryOptions(db.AdminSettings, req);
-
-        // if (q) {
-        //     where = {
-        //         ...where,
-        //         [Op.or]: [
-        //             { title: { [Op.iLike]: `%${q}%` } },
-        //         ]
-        //     };
-        // }
-
-        // queryOptions.include = include;
-        // queryOptions.where = where;
-
-        // let setting = await db.AdminSettings.findAndCountAll(queryOptions);
-        // if (!setting) throw new Error(ErrorConstant.SETTING_NOT_FOUND);
-
-        // return setting;
+    store: async (body) => {
+        const music = new Music({
+            title: body.title,
+            artist: body.artist,
+            url: body.url,
+        })
+        return await music.save();
     }
-
 };
 
 MusicRepository.name = 'MusicRepository';
