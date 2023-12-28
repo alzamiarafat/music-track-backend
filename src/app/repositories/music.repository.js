@@ -1,13 +1,12 @@
-// const ModelService = require('../../services/common/model.service');
-// const { Op } = require('sequelize');
-// const db = require('../../models/commerce');
-// const { ErrorConstant } = require('../../constant');
-
 const Music = require("../models/Music");
 
 const MusicRepository = {
     all: async (req) => {
-        return await Music.find();
+        const queryOptions = {};
+        if (req.query.keyword) {
+            queryOptions.title = { '$regex': req.query.keyword, '$options': 'i' };
+        }
+        return await Music.find(queryOptions);
     },
 
     one: async (id) => {
@@ -19,6 +18,7 @@ const MusicRepository = {
             title: body.title,
             artist: body.artist,
             url: body.url,
+            description: body.description
         })
         return await music.save();
     }

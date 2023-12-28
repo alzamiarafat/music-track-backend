@@ -11,8 +11,8 @@ const MusicService = {
     },
 
     store: async (req) => {
-        const { title, artist, url } = req.body;
-        const data = { title, artist, url };
+        const { title, artist, url, description } = req.body;
+        const data = { title, artist, url, description };
 
         return await MusicRepository.store(data);
     }
